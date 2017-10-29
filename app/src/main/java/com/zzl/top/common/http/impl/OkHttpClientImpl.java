@@ -1,6 +1,7 @@
 package com.zzl.top.common.http.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.zzl.top.Const;
 import com.zzl.top.common.http.IHttpClient;
 import com.zzl.top.common.http.IRequest;
 import com.zzl.top.common.http.IResponse;
@@ -8,8 +9,10 @@ import com.zzl.top.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -25,7 +28,9 @@ import okhttp3.Response;
 public class OkHttpClientImpl implements IHttpClient {
     public static final String TAG = "OkHttpClientImpl";
 
-    OkHttpClient mOkHttpClient = new OkHttpClient.Builder().build();
+    private static final OkHttpClient mOkHttpClient = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS).build();
 
     @Override
     public IResponse get(IRequest request) {
@@ -127,6 +132,7 @@ public class OkHttpClientImpl implements IHttpClient {
             // 设置状态码
             commonResponse.setCode(response.code());
             String body = response.body().string();
+            if (Const.DEBUG) LogUtils.i(TAG, "body:" + body);
             // 设置响应数据
             commonResponse.setData(body);
         } catch (IOException e) {
@@ -135,6 +141,6 @@ public class OkHttpClientImpl implements IHttpClient {
             commonResponse.setData(e.getMessage());
         }
         return commonResponse;
-
     }
+
 }

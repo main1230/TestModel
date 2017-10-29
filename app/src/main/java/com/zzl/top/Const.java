@@ -12,5 +12,10 @@ public class Const {
     /**
      * url
      */
-    public static final String URLs = "http://www.zzl.cn";
+    public static final String URL = "http://cn.zzl.com";
+
+    public static class Api {
+        public static final String login = "/user/login";
+        public static final String register = "/user/register";
+    }
 }

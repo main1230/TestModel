@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    /******* 网络请求库 ********************/
+    compile okhttp3.logging_interceptor
+    compile retrofit2.retrofit
+    compile retrofit2.adapter_rxjava2
+    compile retrofit2.converter_gson
+    compile log
+    compile fastjson
+}

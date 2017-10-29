@@ -41,6 +41,11 @@ public class BaseRequest implements IRequest {
     }
 
     @Override
+    public void setParam(Map<String, Object> params) {
+        this.params = params;
+    }
+
+    @Override
     public String getUrl() {
         if (method.equals(GET)) {
             if (params != null && !params.isEmpty()) {

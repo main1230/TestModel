@@ -32,6 +32,12 @@ public interface IRequest {
     void setParam(String key, Object value);
 
     /**
+     * 指定请求参数
+     * @param params
+     */
+    void setParam(Map<String, Object> params);
+
+    /**
      * 提供给执行库请求行URL
      * @return
      */
